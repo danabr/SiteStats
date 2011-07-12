@@ -3,6 +3,6 @@ body {
 }
 
 #statsbox {
-  max-height:200px;
+  max-height:325px;
   overflow-y: auto;
 }

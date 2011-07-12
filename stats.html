@@ -21,6 +21,20 @@
 </html>
 
 <script type="text/javascript">
+  function sortEntries() {
+    var entries = []
+    for(var host in localStorage) {
+      entries.push({"host": host, "hours": parseFloat(localStorage[host])});
+    }
+    return entries.sort(function(a, b) {
+      if(b.hours > a.hours) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+  }
+  
   function updateStats() {
     var statsTable = document.getElementById("stats");
     
@@ -29,12 +43,14 @@
     }
     
     // Add new rows
-    for(var host in localStorage) {
+    var sortedEntries = sortEntries();
+    for(var index in sortedEntries) {
+      entry = sortedEntries[index];
       var row = document.createElement("tr");
       var siteCell = document.createElement("td");
-      siteCell.appendChild(document.createTextNode(host));
+      siteCell.appendChild(document.createTextNode(entry.host));
       var hoursCell = document.createElement("td");
-      hoursCell.appendChild(document.createTextNode(localStorage[host]));
+      hoursCell.appendChild(document.createTextNode(entry.hours));
       row.appendChild(siteCell);
       row.appendChild(hoursCell);
       statsTable.appendChild(row);

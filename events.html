@@ -9,7 +9,7 @@
     updateSiteTime: function(host, start, end) {
       hours = (end - start) / (1000*60*60);
       if(localStorage[host] !== undefined) {
-        hours += parseInt(localStorage[host]);
+        hours += parseFloat(localStorage[host]);
       }
       localStorage[host] = hours;
     }
