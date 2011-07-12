@@ -1,0 +1,7 @@
+{
+  "name": "TabStats",
+  "version": "0.1",
+  "description:": "Gathers statistics about which sites you visit the most",
+  "permissions": ["tabs"],
+  "background_page": "events.html"
+}

@@ -1,0 +1,7 @@
+A Google Chrome extension for gathering statistics of which sites you
+visit most frequently. Created as an extension creation learning activity.
+
+TODO:
+* Add a statistics page.
+* Don't store sessions, but rather how much time a user has spent on a certain
+  site.

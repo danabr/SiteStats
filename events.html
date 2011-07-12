@@ -1,0 +1,46 @@
+<script type="text/javascript">
+  // State
+  TabStats = {
+    tabs: {},
+    sessions: [],
+    addSession: function (host, start, end) {
+      TabStats.sessions.push([host, start, end]);
+      localStorage.sessions = JSON.stringify(TabStats.sessions);
+    }
+  }
+  
+  // Load old sessions
+  if (localStorage.sessions !== undefined) {
+    TabStats.sessions = JSON.parse(localStorage.sessions);
+  }
+  
+  /*
+    Event listeners
+  */
+  
+  // Handle page switch
+  chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+    if (changeInfo.url !== undefined) {
+      host = changeInfo.url.match(/:\/\/(.[^/]+)/)[1];
+      entry = TabStats.tabs[tabId]
+      if (entry !== undefined) {
+        if (host !== entry[0]) { // New page loaded
+          TabStats.addSession(entry[0], entry[1], new Date());
+          entry[0] = host;
+          entry[1] = new Date();
+        }
+      } else { // New tab
+        TabStats.tabs[tabId] = [host, new Date()]
+      }
+    }
+  });
+  
+  // Handle closing tabs
+  chrome.tabs.onRemoved.addListener(function(tabId, removeInfo) {
+    entry = TabStats.tabs[tabId]
+    if (entry !== undefined) {
+      TabStats.addSession(entry[0], entry[1], new Date());
+      delete TabStats.tabs[tabId];
+    }
+  });
+</script>
