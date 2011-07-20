@@ -36,7 +36,7 @@ function updateStats() {
     var siteCell = document.createElement("td");
     siteCell.appendChild(document.createTextNode(entry.host));
     var hoursCell = document.createElement("td");
-    hoursCell.appendChild(document.createTextNode(entry.hours.toFixed(2)));
+    hoursCell.appendChild(document.createTextNode((entry.hours || 0).toFixed(2)));
     var timesCell = document.createElement("td");
     timesCell.appendChild(document.createTextNode(entry.times));
     row.appendChild(siteCell);
