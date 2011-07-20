@@ -1,8 +1,12 @@
 body {
-  width: 325px;
+  width: 400px;
 }
 
 #statsbox {
-  max-height:325px;
+  max-height:400px;
   overflow-y: auto;
+}
+
+th, td {
+  text-align: left;
 }
