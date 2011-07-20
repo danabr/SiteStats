@@ -11,7 +11,7 @@
       var entry = {host: host, hours: hours, times: 1}
       if (localStorage[host] !== undefined) {
         entry = JSON.parse(localStorage[host]);
-        entry.hours += parseFloat(localStorage[host]);
+        entry.hours += entry.hours;
         entry.times += 1;
       }
       localStorage[host] = JSON.stringify(entry);
